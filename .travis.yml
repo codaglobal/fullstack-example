@@ -13,5 +13,5 @@ addons:
     - ubuntu-toolchain-r-test
     packages:
     - g++-4.8
-after_install:
+before_script:
   - npm start

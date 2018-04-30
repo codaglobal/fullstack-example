@@ -32,7 +32,7 @@ app.get('/', (req, res) => {
 
 // define health-check endpoint
 app.get('/healthz', (req, res) => {
-    res.message("OK");
+    res.send("OK");
 });
 
 require('./routes/movie.routes.js')(app);
