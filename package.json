@@ -1,0 +1,40 @@
+{
+  "name": "fullstack-example",
+  "version": "0.0.1",
+  "description": "Full Stack JavaScript application for testing and demos",
+  "main": "app/server.js",
+  "scripts": {
+    "test": "./node_modules/.bin/mocha --reporter spec",
+    "start": "node app/server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codaglobal/fullstack-example.git"
+  },
+  "keywords": [
+    "fullstack",
+    "js",
+    "javascript",
+    "coda",
+    "demo",
+    "nodejs",
+    "express"
+  ],
+  "author": "Coda Global",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/codaglobal/fullstack-example/issues"
+  },
+  "homepage": "https://github.com/codaglobal/fullstack-example#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.3",
+    "mongoose": "^5.0.16"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "eslint": "^4.19.1",
+    "mocha": "^5.1.1",
+    "request": "^2.85.0"
+  }
+}
