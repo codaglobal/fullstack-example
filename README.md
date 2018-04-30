@@ -4,6 +4,12 @@ This project was generated with the [Angular Full-Stack Generator](https://githu
 
 ## Getting Started
 
+## ToDo
+
+- Convert into microservices running in separate containers
+- Orchestrate microservices with kubernetes
+- Test on minikube
+
 ### Prerequisites
 
 - [Git](https://git-scm.com/)
