@@ -1,17 +1,43 @@
 language: node_js
+sudo: required
 node_js:
   - 6
-services: mongodb
+services: 
+  - mongodb
+  - docker
 cache:
   directories:
     - node_modules
 env:
-  - CXX=g++-4.8
+  global:
+    - CXX=g++-4.8
+    - IMAGE_NAME=cloudchaos/fullstack-example
+    - version=0.0.2
+    - MONGODB_HOST=mongodb
+    - MONGODB_PORT=27017
 addons:
   apt:
     sources:
     - ubuntu-toolchain-r-test
     packages:
     - g++-4.8
-before_script:
-  - npm start &
+
+before_install:
+  - docker run --name mongodb -d mongo
+  - docker build --tag "${IMAGE_NAME}:${TRAVIS_BUILD_NUMBER}" ./
+  - docker images
+
+install:
+  - docker run --name movie-api --link ${MONGODB_HOST}:${MONGODB_PORT} -p 3000:3000 ${IMAGE_NAME}:${TRAVIS_BUILD_NUMBER}
+  - docker ps
+
+before_deploy:
+  - docker login -u "$REGISTRY_USER" -p "$REGISTRY_PASS"
+  - docker tag "$IMAGE_NAME" "${IMAGE_NAME}:latest"
+  - docker tag "$IMAGE_NAME" "${IMAGE_NAME}:${version}"
+
+deploy:
+  provider: script
+  script: docker push "${IMAGE_NAME}:latest" && docker push "${IMAGE_NAME}:${version}"
+  on:
+    branch: master
