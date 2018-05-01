@@ -27,7 +27,7 @@ before_install:
   - docker images
 
 install:
-  - docker run --name movie-api --link ${MONGODB_HOST}:${MONGODB_PORT} -p 3000:3000 -d ${IMAGE_NAME}:${TRAVIS_BUILD_NUMBER}
+  - docker run --name movie-api --link ${MONGODB_HOST}:${MONGODB_PORT} -e "MONGODB_HOST=${MONGODB_HOST}" -e "MONGODB_PORT=${MONGODB_PORT}" -p 3000:3000 -d ${IMAGE_NAME}:${TRAVIS_BUILD_NUMBER}
   - docker ps
 
 before_deploy:
