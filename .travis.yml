@@ -23,11 +23,11 @@ addons:
 
 before_install:
   - docker run --name mongodb -d mongo
-  - docker build --tag "${IMAGE_NAME}:${TRAVIS_BUILD_NUMBER}" ./
+  - docker build --tag ${IMAGE_NAME}:${TRAVIS_BUILD_NUMBER} ./
   - docker images
 
 install:
-  - docker run --name movie-api --link ${MONGODB_HOST}:${MONGODB_PORT} -p 3000:3000 ${IMAGE_NAME}:${TRAVIS_BUILD_NUMBER}
+  - docker run --name movie-api --link ${MONGODB_HOST}:${MONGODB_PORT} -p 3000:3000 -d ${IMAGE_NAME}:${TRAVIS_BUILD_NUMBER}
   - docker ps
 
 before_deploy:
