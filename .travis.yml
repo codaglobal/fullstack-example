@@ -9,17 +9,10 @@ cache:
     - node_modules
 env:
   global:
-    - CXX=g++-4.8
     - IMAGE_NAME=cloudchaos/fullstack-example
     - version=0.0.2
     - MONGODB_HOST=mongodb
     - MONGODB_PORT=27017
-addons:
-  apt:
-    sources:
-    - ubuntu-toolchain-r-test
-    packages:
-    - g++-4.8
 
 before_install:
   - docker run --name mongodb -d mongo
