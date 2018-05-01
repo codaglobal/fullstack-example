@@ -6,11 +6,11 @@ Use this application for testing or demo purposes.
 
 ## Using
 
-Clone this repo
-Issue `npm install`
-Start a mongodb somewhere
-Modify /config/database.config.js to reflect location of mongodb
-Open a browser, and point to <http://localhost:3000>
+- Clone this repo
+- Issue `npm install`
+- Start a mongodb somewhere
+- Modify /config/database.config.js to reflect location of mongodb
+- Open a browser, and point to <http://localhost:3000>
 
 ## ToDo
 
