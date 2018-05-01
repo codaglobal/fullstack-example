@@ -12,5 +12,6 @@ Open a browser, and point to <http://localhost:3000>
 
 ## ToDo
 
-- Place app into container(s)
+- DONE: Place app into container(s)
+- Update testing to use containers (node app & mongodb)
 - Orchestrate app with kubernetes
