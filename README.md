@@ -17,4 +17,8 @@ Use this application for testing or demo purposes.
 - DONE: Place app into container(s)
 - DONE: Update DB config to use env variables
 - DONE: Update testing to use containers (node app & mongodb)
-- Orchestrate app with kubernetes
+- DONE: Orchestrate app with kubernetes
+- Expand unit test coverage to 100%
+- Create UI
+- Create E2E tests and automate running
+- Create dummy data set and populate DB for demo purposes

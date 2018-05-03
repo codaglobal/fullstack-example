@@ -14,13 +14,13 @@ service:
   port: 80
 
 ingress:
-  enabled: "false"
+  enabled: "true"
   annotations: {}
     # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
   path: /api/movies
   hosts:
-    - chart-example.local
+    - k8s.demo
   tls: []
   #  - secretName: chart-example-tls
   #    hosts:
