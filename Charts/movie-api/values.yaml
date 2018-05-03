@@ -19,7 +19,7 @@ ingress:
   annotations: {}
     # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
-  path: /api/movies
+  path: /
   hosts:
     - k8s.demo
   tls: []
