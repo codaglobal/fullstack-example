@@ -13,7 +13,7 @@ spec:
     - port: {{ .Values.service.port }}
       targetPort: 3000
       protocol: TCP
-      name: http
+      name: {{ .Values.service.portName }}
   selector:
     app: {{ template "movie-api.name" . }}
     release: {{ .Release.Name }}

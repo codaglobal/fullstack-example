@@ -29,17 +29,17 @@ spec:
             - name: MONGODB_PORT
               value: {{ .Values.config.mongo_port | quote }}
           ports:
-            - name: http
+            - name: {{ .Values.service.portName }}
               containerPort: 3000
               protocol: TCP
           livenessProbe:
             httpGet:
               path: /healthz
-              port: http
+              port: 3000
           readinessProbe:
             httpGet:
               path: /movies
-              port: http
+              port: 3000
           resources:
 {{ toYaml .Values.resources | indent 12 }}
     {{- with .Values.nodeSelector }}
