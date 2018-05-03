@@ -29,7 +29,7 @@ spec:
   rules:
   {{- range .Values.ingress.hosts }}
     - host: {{ . }}
-      {{ $portName }}:
+      http:
         paths:
           - path: {{ $ingressPath }}
             backend:
