@@ -42,3 +42,6 @@ To use with k8s:
 - Create UI
 - Create E2E tests and automate running
 - Create dummy data set and populate DB for demo purposes
+- Consider how to also automate testing the k8s orchestration
+  - at least helm lint the chart(s)?
+  - maybe use Cloudify or 'minikube in Travis' to do E2E testing and include helm chart?
