@@ -6,6 +6,10 @@ Use this application for testing or demo purposes.
 
 ## Using
 
+It is suggested that if you are going to use minikube for the demo that you create a hosts file entry to provide a name "k8s.demo" that will resolve to your minikube cluster.
+
+To run the app in node locally or on a linux vm:
+
 - Clone this repo
 - Start a mongodb somewhere
 - Modify /config/database.config.js to reflect location of mongodb
@@ -31,6 +35,9 @@ To use with k8s:
 - DONE: Update DB config to use env variables
 - DONE: Update testing to use containers (node app & mongodb)
 - DONE: Orchestrate app with kubernetes
+- Move the API from / to /api or something
+  - update node server
+  - update helm chart / ingress
 - Expand unit test coverage to 100%
 - Create UI
 - Create E2E tests and automate running
