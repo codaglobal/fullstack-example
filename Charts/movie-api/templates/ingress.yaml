@@ -1,6 +1,7 @@
 {{- if .Values.ingress.enabled -}}
 {{- $fullName := include "movie-api.fullname" . -}}
 {{- $ingressPath := .Values.ingress.path -}}
+{{- $portName := .Values.service.portName -}}
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
@@ -28,7 +29,7 @@ spec:
   rules:
   {{- range .Values.ingress.hosts }}
     - host: {{ . }}
-      {{ .Values.service.portName }}:
+      {{ $portName }}:
         paths:
           - path: {{ $ingressPath }}
             backend:
