@@ -35,13 +35,12 @@ To use with k8s:
 - DONE: Update DB config to use env variables
 - DONE: Update testing to use containers (node app & mongodb)
 - DONE: Orchestrate app with kubernetes
-- Move the API from / to /api or something
-  - update node server
+- DONE: (k8s only) Move the API from / to /api or something
   - update helm chart / ingress
-- Expand unit test coverage to 100%
-- Create UI
-- Create E2E tests and automate running
+- Create UI - leverage BDD pattern if possible so there are automated tests for FR as well
 - Create dummy data set and populate DB for demo purposes
+- Expand unit test coverage to 100%
+- Create E2E tests and automate running
 - Consider how to also automate testing the k8s orchestration
   - at least helm lint the chart(s)?
   - maybe use Cloudify or 'minikube in Travis' to do E2E testing and include helm chart?
