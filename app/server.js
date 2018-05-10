@@ -1,6 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const Router = require('express').Router;
 
+this.router = new Router();
 // create express app
 const app = express();
 
@@ -25,17 +27,19 @@ mongoose.connect(dbConfig.url)
     process.exit();
 });
 
+app.use('/api', this.router);
+
 // define a simple route
-app.get('/', (req, res) => {
+this.router.get('/', (req, res) => {
     res.json({"message": "Movie Library.  Use this to store your movie collection."});
 });
 
 // define health-check endpoint
-app.get('/healthz', (req, res) => {
+this.router.get('/healthz', (req, res) => {
     res.send("OK");
 });
 
-require('./routes/movie.routes.js')(app);
+require('./routes/movie.routes.js')(this.router);
 
 // listen for requests
 app.listen(3000, () => {
