@@ -55,7 +55,7 @@ describe("Movie Library API", () => {
 
       it('should be equal to length in mock data', function (done) {
               let data = response._getData();
-              expect(data.length).to.be.equal(mockData.movies.length);
+              expect(data).to.be.an('array');
               done();
       });
   });
@@ -170,9 +170,6 @@ describe("Movie Library API", () => {
 
       it('should return requested Object.', function (done) {
           let result = response._getData();
-          console.log('*******');
-          console.log(result);
-          console.log('*******');
           expect(result._id.toString()).to.be.equal(body._id.toString());
           done();
       });

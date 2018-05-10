@@ -4,7 +4,7 @@
   "description": "Full Stack JavaScript application for testing and demos",
   "main": "app/server.js",
   "scripts": {
-    "test": "gulp test",
+    "test": "test=true gulp test",
     "start": "node app/server",
     "start-dev": "nodemon app/server"
   },

@@ -1,6 +1,7 @@
 let database = '/movies';
-let host = process.env.MONGODB_HOST || (() => {database = '/test'; return 'localhost'})();
-let port = process.env.MONGODB_PORT || (() => {database = '/test'; return '27018'})();
+let testCases = process.env.test;
+let host = testCases ? 'localhost' : process.env.MONGODB_HOST;
+let port = testCases ? '27017' : process.env.MONGODB_PORT;
 
 let url = 'mongodb://' + host + ':' + port + database;
 
