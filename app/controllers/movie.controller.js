@@ -1,11 +1,12 @@
 const Movie = require('../models/movie.model.js');
+const errorMsgs = require('../constants/errormsg.constants');
 
 // Create and Save a new Movie
 exports.create = (req, res) => {
     // Validate request
     if(!req.body.description) {
         return res.status(400).send({
-            message: "Movie description cannot be empty"
+            message: errorMsgs.MOVIE_CREATE.NO_DESCRIPTION
         });
     }
 
@@ -45,7 +46,7 @@ exports.findOne = (req, res) => {
     .then(movie => {
         if(!movie) {
             return res.status(404).send({
-                message: "Movie not found with id " + req.params.movieId
+                message: errorMsgs.NOT_FOUND(req.params.movieId)//"Movie not found with id " + req.params.movieId
             });            
         }
         res.send(movie);
@@ -66,7 +67,7 @@ exports.update = (req, res) => {
     // Validate Request
     if(!req.body.description) {
         return res.status(400).send({
-            message: "Movie description can not be empty"
+            message: errorMsgs.MOVIE_CREATE.NO_DESCRIPTION
         });
     }
 
@@ -79,14 +80,14 @@ exports.update = (req, res) => {
     .then(movie => {
         if(!movie) {
             return res.status(404).send({
-                message: "Movie not found with id " + req.params.movieId
+                message: errorMsgs.NOT_FOUND(req.params.movieId)
             });
         }
         res.send(movie);
     }).catch(err => {
         if(err.kind === 'ObjectId') {
             return res.status(404).send({
-                message: "Movie not found with id " + req.params.movieId
+                message: errorMsgs.NOT_FOUND(req.params.movieId)
             });                
         }
         return res.status(500).send({
@@ -101,14 +102,14 @@ exports.delete = (req, res) => {
     .then(movie => {
         if(!movie) {
             return res.status(404).send({
-                message: "Movie not found with id " + req.params.movieId
+                message: errorMsgs.NOT_FOUND(req.params.movieId)
             });
         }
         res.send({message: "Movie deleted successfully!"});
     }).catch(err => {
         if(err.kind === 'ObjectId' || err.name === 'NotFound') {
             return res.status(404).send({
-                message: "Movie not found with id " + req.params.movieId
+                message: errorMsgs.NOT_FOUND(req.params.movieId)
             });                
         }
         return res.status(500).send({
