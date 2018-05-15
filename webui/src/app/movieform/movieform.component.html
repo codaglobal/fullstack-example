@@ -1,0 +1,38 @@
+<div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close noOutline" data-dismiss="modal" #addMoviecloseBtn>&times;</button>
+          </div>
+      <div class="modal-body">
+            <form (ngSubmit)="onSubmit()" #heroForm="ngForm">
+              <div class="form-group">
+                <label for="name">Title</label>
+                <input type="text" class="form-control" id="name"
+                       required
+                       [(ngModel)]="newMovie.title" name="title"
+                       #name="ngModel">
+              </div>
+        
+              <div class="form-group">
+                <label for="description">Description</label>
+                <input type="text" class="form-control" id="description"
+                required
+                       [(ngModel)]="newMovie.description" name="description">
+              </div>
+        
+              <div class="form-group">
+                  <label for="genre">Genre</label>
+                  <input type="text" class="form-control" id="genre"
+                  required
+                         [(ngModel)]="newMovie.genre" name="genre">
+              </div>
+        
+              <button type="submit" class="btn btn-success" [disabled]="!heroForm.form.valid">{{update? 'Update' :'Submit'}}</button>
+              <button class="btn noOutline" data-dismiss="modal">Cancel</button>
+            </form>
+      </div>
+    </div>
+
+  </div>
