@@ -32,3 +32,9 @@ class MongoDb {
 
 module.exports.MongoDb = MongoDb;
 module.exports.MongoUnit = mongoUnit;
+module.exports.initDb = () => {
+  let mongoDb = new MongoDb();
+  mongoDb.startMockDb(() => {
+      console.log("db started.");
+  });
+};

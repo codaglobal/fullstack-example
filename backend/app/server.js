@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const Router = require('express').Router;
+const cors = require('cors');
 
 this.router = new Router();
 // create express app
@@ -11,6 +12,14 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 // parse application/json
 app.use(bodyParser.json())
+// Configure cors
+let corsOptions = {
+    'origin': process.env.web_domain,
+    'methods': ['GET', 'POST', 'PUT', 'DELETE'],
+    'allowedHeaders': ['Content-Type'],
+    'credentials': true
+};
+app.use(cors(corsOptions));
 
 // Configuring the database
 const dbConfig = require('../config/database.config.js');
