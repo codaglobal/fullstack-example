@@ -5,7 +5,7 @@
 replicaCount: 1
 
 image:
-  repository: movies-frontend-test
+  repository: demo-app-ui
   tag: latest
   pullPolicy: IfNotPresent
 
@@ -22,7 +22,7 @@ ingress:
     # kubernetes.io/tls-acme: "true"
   path: /
   hosts:
-    - k8s-ui.demo
+    - k8s.demo
   tls: []
   #  - secretName: chart-example-tls
   #    hosts:

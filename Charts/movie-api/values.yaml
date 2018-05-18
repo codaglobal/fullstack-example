@@ -5,7 +5,7 @@
 replicaCount: 1
 
 image:
-  repository: movie-app2
+  repository: demo-app-service
   tag: latest
   pullPolicy: IfNotPresent
 
