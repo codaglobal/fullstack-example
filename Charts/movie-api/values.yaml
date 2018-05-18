@@ -5,7 +5,7 @@
 replicaCount: 1
 
 image:
-  repository: cloudchaos/fullstack-example
+  repository: movie-app2
   tag: latest
   pullPolicy: IfNotPresent
 
@@ -29,7 +29,7 @@ ingress:
   #      - chart-example.local
 
 config:
-  mongo_host: fs-demo-db-mongodb.default
+  mongo_host: db-fs-demo-mongodb.default.svc.cluster.local
   mongo_port: 27017
 
 resources:
