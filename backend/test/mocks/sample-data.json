@@ -1,0 +1,28 @@
+{
+  "movies": [
+    {
+      "title": "skull island",
+      "genre": "adventure",
+      "description": "Story of a big gorilla.",
+      "createdAt": "2018-05-08T11:52:00.932Z",
+      "updatedAt": "2018-05-08T12:04:52.888Z",
+      "__v": 0
+    },
+    {
+      "title": "kingkong",
+      "genre": "adventure",
+      "description": "Story of a big gorilla.",
+      "createdAt": "2018-05-08T12:05:16.536Z",
+      "updatedAt": "2018-05-08T12:05:16.536Z",
+      "__v": 0
+    },
+    {
+      "title": "13 hours",
+      "genre": "adventure, action",
+      "description": "Story of a war.",
+      "createdAt": "2018-05-08T12:06:16.935Z",
+      "updatedAt": "2018-05-08T12:06:16.935Z",
+      "__v": 0
+    }
+  ]
+}

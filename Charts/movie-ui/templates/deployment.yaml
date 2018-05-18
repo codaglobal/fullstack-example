@@ -1,45 +1,54 @@
 apiVersion: apps/v1beta2
 kind: Deployment
 metadata:
-  name: {{ template "movie-api.fullname" . }}
+  name: {{ template "movie-ui.fullname" . }}
   labels:
-    app: {{ template "movie-api.name" . }}
-    chart: {{ template "movie-api.chart" . }}
+    app: {{ template "movie-ui.name" . }}
+    chart: {{ template "movie-ui.chart" . }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: {{ template "movie-api.name" . }}
+      app: {{ template "movie-ui.name" . }}
       release: {{ .Release.Name }}
   template:
     metadata:
       labels:
-        app: {{ template "movie-api.name" . }}
+        app: {{ template "movie-ui.name" . }}
         release: {{ .Release.Name }}
     spec:
+      hostAliases:
+        - ip: "127.0.0.1"
+          hostnames:
+          - "foo.local"
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+           
           env:
-            - name: MONGODB_HOST
-              value: {{ .Values.config.mongo_host | quote }}
-            - name: MONGODB_PORT
-              value: {{ .Values.config.mongo_port | quote }}
+            - name: SERVICE_HOST
+              value: {{ .Values.config.service_host | quote }}
+            - name: SERVICE_PORT
+              value: {{ .Values.config.service_port | quote }}
+            - name: GET_HOSTS_FROM
+              value: dns
           ports:
             - name: {{ .Values.service.portName }}
-              containerPort: 3000
+              containerPort: 80
               protocol: TCP
-          livenessProbe:
-            httpGet:
-              path: /api/healthz
-              port: 3000
-          readinessProbe:
-            httpGet:
-              path: /api/movies
-              port: 3000
+          
+          
+          #livenessProbe:
+          #  httpGet:
+          #    path: /healthz
+          #    port: 80
+          #readinessProbe:
+          #  httpGet:
+          #    path: /movies
+          #    port: 80
           resources:
 {{ toYaml .Values.resources | indent 12 }}
     {{- with .Values.nodeSelector }}
