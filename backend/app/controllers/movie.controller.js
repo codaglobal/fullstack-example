@@ -16,14 +16,13 @@ exports.create = (req, res) => {
         genre: req.body.genre || "None",
         description: req.body.description
     });
-
     // Save Movie in the database
     movie.save()
     .then(data => {
         res.send(data);
     }).catch(err => {
         res.status(500).send({
-            message: err.message || "Some error occurred while creating the Movie."
+            message: err.message || errorMsgs.MOVIE_CREATE.UNEXPECTED_ERROR
         });
     });
 };
@@ -44,6 +43,7 @@ exports.findAll = (req, res) => {
 exports.findOne = (req, res) => {
     Movie.findById(req.params.movieId)
     .then(movie => {
+        console.log('came', movie)
         if(!movie) {
             return res.status(404).send({
                 message: errorMsgs.NOT_FOUND(req.params.movieId)//"Movie not found with id " + req.params.movieId
@@ -53,7 +53,7 @@ exports.findOne = (req, res) => {
     }).catch(err => {
         if(err.kind === 'ObjectId') {
             return res.status(404).send({
-                message: "Movie not found with id " + req.params.movieId
+                message: errorMsgs.NOT_FOUND(req.params.movieId)
             });                
         }
         return res.status(500).send({
@@ -79,6 +79,7 @@ exports.update = (req, res) => {
     }, {new: true})
     .then(movie => {
         if(!movie) {
+            console.log('hehe')
             return res.status(404).send({
                 message: errorMsgs.NOT_FOUND(req.params.movieId)
             });

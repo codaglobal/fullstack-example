@@ -4,7 +4,6 @@
   "description": "Full Stack JavaScript application for testing and demos",
   "main": "app/server.js",
   "scripts": {
-    "pretest": "node -e 'require(\"./test/mocks/mongoDb.js\").initDb()' &",
     "test": "test=true gulp test",
     "start": "node app/server",
     "start-dev": "nodemon app/server",
@@ -40,14 +39,13 @@
   "devDependencies": {
     "chai": "^4.1.2",
     "eslint": "^4.19.1",
+    "gulp": "^3.9.1",
+    "gulp-exit": "0.0.2",
+    "gulp-mocha": "^5.0.0",
     "mocha": "^5.1.1",
     "mongo-unit": "^1.3.2",
     "node-mocks-http": "^1.5.8",
     "nodemon": "^1.17.4",
-    "gulp": "^3.9.1",
-    "gulp-exit": "0.0.2",
-    "gulp-mocha": "^5.0.0",
-    "gulp-run": "^1.7.1",
     "nyc": "^11.7.3",
     "request": "^2.85.0"
   }
