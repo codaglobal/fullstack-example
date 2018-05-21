@@ -23,6 +23,7 @@ matrix:
          - docker images
 
        install:
+         - cd backend
          - docker run --name movie-api --link ${MONGODB_HOST}:${MONGODB_PORT} -e "MONGODB_HOST=${MONGODB_HOST}" -e "MONGODB_PORT=${MONGODB_PORT}" -p 3000:3000 -d ${IMAGE_NAME_BACKEND}
          - docker ps
          - npm install
@@ -58,9 +59,11 @@ matrix:
          - docker images
 
        install:
+         - cd webui
          - docker run --name movie-webui -p 80:80 -d ${IMAGE_NAME_WEBUI}
          - docker ps
          - npm install
+
        before_deploy:
          - docker login -u "$REGISTRY_USER" -p "$REGISTRY_PASS"
          - docker tag "IMAGE_NAME_WEBUI" "${IMAGE_NAME_WEBUI}:latest"
