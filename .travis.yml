@@ -21,7 +21,7 @@ matrix:
        before_install:
          - cd backend
          - docker run --name mongodb -d mongo
-         - docker build --tag ${IMAGE_NAME} .
+         - docker build --tag ${IMAGE_NAME} ./
          - docker images
 
        install:
@@ -54,7 +54,7 @@ matrix:
 
        before_install:
          - cd frontend
-         - docker build --tag ${IMAGE_NAME} .
+         - docker build --tag ${IMAGE_NAME} ./
          - docker images
 
        install:
