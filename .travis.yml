@@ -6,8 +6,6 @@ matrix:
          - 6
        services:
          - docker
-       before_script:
-         -  cd backend
        cache:
          directories:
            - node_modules
@@ -20,8 +18,9 @@ matrix:
 
        before_install:
          - cd backend
+         - echo ${IMAGE_NAME}
          - docker run --name mongodb -d mongo
-         - docker build --tag ${IMAGE_NAME} ./
+         - docker build --tag ${IMAGE_NAME} ./backend/
          - docker images
 
        install:
@@ -40,8 +39,6 @@ matrix:
        sudo: required
        node_js:
          - 6
-       before_script:
-         -  cd backend
        services:
          - docker
        cache:
@@ -54,7 +51,7 @@ matrix:
 
        before_install:
          - cd frontend
-         - docker build --tag ${IMAGE_NAME} ./
+         - docker build --tag ${IMAGE_NAME} ./webui/
          - docker images
 
        install:
