@@ -27,12 +27,6 @@ matrix:
          - docker ps
          - npm install
 
-       before_deploy:
-         - docker login -u "$REGISTRY_USER" -p "$REGISTRY_PASS"
-         - docker tag "$IMAGE_NAME" "${IMAGE_NAME}:latest"
-         - docker tag "$IMAGE_NAME" "${IMAGE_NAME}:${version}"
-
-
 
     -  language: node_js
        sudo: required

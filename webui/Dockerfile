@@ -1,11 +1,19 @@
 FROM node:6.14 as builder
 RUN pwd
-RUN mkdir /coda
-
-COPY . /coda/
-COPY package*.json /coda/
+RUN mkdir -p /coda && \
+    mkdir -p /coda/dist
 
 WORKDIR /coda
+
+COPY . ./
+COPY package*.json ./
+RUN npm install && \
+    npm run build
+
+RUN echo '*********************************' && \
+    ls dist/
+
+
 
 #RUN npm install --global typescript
 #RUN echo "install done"
@@ -20,6 +28,7 @@ RUN apk update && apk add bash ca-certificates curl && \
 WORKDIR /usr/share/nginx/html
 
 COPY --from=builder /coda/dist .
+RUN ls
 
 RUN mkdir /temp
 COPY ./nginx.conf.template /temp
