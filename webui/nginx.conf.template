@@ -39,9 +39,9 @@ http {
           try_files $uri $uri/ /index.html;
       }
 
-      location /api {
-        proxy_pass http://{{ .Env.SERVICE_HOST }}:{{ .Env.SERVICE_PORT}}/api;
-      }
+      #location /api {
+      #  proxy_pass http://{{ .Env.SERVICE_HOST }}:{{ .Env.SERVICE_PORT}}/api;
+      #}
 
     }
 
