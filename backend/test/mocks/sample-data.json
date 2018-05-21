@@ -1,0 +1,50 @@
+{
+  "movies": [
+    {
+      "title": "skull island",
+      "genre": "adventure",
+      "description": "Story of a big gorilla."
+    },
+    {
+      "title": "kingkong",
+      "genre": "adventure",
+      "description": "Story of a big gorilla."
+    },
+    {
+      "title": "13 hours",
+      "genre": "adventure, action",
+      "description": "Story of a war, use for update."
+    },
+    {
+      "title": "Dead pool",
+      "genre": "adventure, action",
+      "description": "Story of a funny boy, use for delete."
+    },
+    {
+      "title": "Spider Man",
+      "genre": "adventure, action",
+      "description": "Story of a small boy, use for get movie."
+    },
+    {
+      "_id": "5afc1b18a9b6ff2b99ccbe46",
+      "title": "Mummy",
+      "genre": "adventure, action",
+      "description": "Story of a pyramids. use for get 404.",
+      "createdAt": "2018-05-08T12:06:16.935Z",
+      "updatedAt": "2018-05-08T12:06:16.935Z",
+      "__v": 0
+    },
+    {
+      "_id": "5afc23352ac4652e9873bdf7",
+      "title": "Ant Man",
+      "genre": "adventure, action",
+      "description": "Ant man, use for delete 404."
+    },
+    {
+      "_id": "5afc232c60308c2e8cdca24b",
+      "title": "avengers",
+      "genre": "adventure, action",
+      "description": "use for update 404"
+    }
+  ]
+}

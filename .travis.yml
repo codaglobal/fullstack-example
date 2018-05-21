@@ -1,36 +1,76 @@
-language: node_js
-sudo: required
-node_js:
-  - 6
-services: 
-  - docker
-cache:
-  directories:
-    - node_modules
-env:
-  global:
-    - IMAGE_NAME=cloudchaos/fullstack-example
-    - version=0.0.2
-    - MONGODB_HOST=mongodb
-    - MONGODB_PORT=27017
+matrix:
+  include:
+    -  language: node_js
+       sudo: required
+       node_js:
+         - 6
+       services:
+         - docker
+       cache:
+         directories:
+           - node_modules
+       env:
+         global:
+           - IMAGE_NAME_BACKEND=cloudchaos/fullstack-example-backend
+           - version=0.0.2
+           - MONGODB_HOST=mongodb
+           - MONGODB_PORT=27017
 
-before_install:
-  - docker run --name mongodb -d mongo
-  - docker build --tag ${IMAGE_NAME} ./
-  - docker images
+       before_install:
+         - echo ${IMAGE_NAME_BACKEND}
+         - docker run --name mongodb -d mongo
+         - docker build --tag ${IMAGE_NAME_BACKEND} ./backend/
+         - docker images
 
-install:
-  - docker run --name movie-api --link ${MONGODB_HOST}:${MONGODB_PORT} -e "MONGODB_HOST=${MONGODB_HOST}" -e "MONGODB_PORT=${MONGODB_PORT}" -p 3000:3000 -d ${IMAGE_NAME}
-  - docker ps
-  - npm install
+       install:
+         - cd backend
+         - docker run --name movie-api --link ${MONGODB_HOST}:${MONGODB_PORT} -e "MONGODB_HOST=${MONGODB_HOST}" -e "MONGODB_PORT=${MONGODB_PORT}" -p 3000:3000 -d ${IMAGE_NAME_BACKEND}
+         - docker ps
+         - npm install
 
-before_deploy:
-  - docker login -u "$REGISTRY_USER" -p "$REGISTRY_PASS"
-  - docker tag "$IMAGE_NAME" "${IMAGE_NAME}:latest"
-  - docker tag "$IMAGE_NAME" "${IMAGE_NAME}:${version}"
+       before_deploy:
+         - docker login -u "$REGISTRY_USER" -p "$REGISTRY_PASS"
+         - docker tag "IMAGE_NAME_BACKEND" "${IMAGE_NAME_BACKEND}:latest"
+         - docker tag "IMAGE_NAME_BACKEND" "${IMAGE_NAME_BACKEND}:${version}"
 
-deploy:
-  provider: script
-  script: docker push "${IMAGE_NAME}:latest" && docker push "${IMAGE_NAME}:${version}"
-  on:
-    branch: master
+       deploy:
+         provider: script
+         script: docker push "${IMAGE_NAME_BACKEND}:latest" && docker push "${IMAGE_NAME_BACKEND}:${version}"
+         on:
+           branch: master
+
+
+    -  language: node_js
+       sudo: required
+       node_js:
+         - 6
+       services:
+         - docker
+       cache:
+         directories:
+           - node_modules
+       env:
+         global:
+           - IMAGE_NAME_WEBUI=cloudchaos/fullstack-example-webui
+           - version=0.0.2
+
+       before_install:
+         - docker build --tag ${IMAGE_NAME_WEBUI} ./webui/
+         - docker images
+
+       install:
+         - cd webui
+         - docker run --name movie-webui -p 80:80 -d ${IMAGE_NAME_WEBUI}
+         - docker ps
+         - npm install
+
+       before_deploy:
+         - docker login -u "$REGISTRY_USER" -p "$REGISTRY_PASS"
+         - docker tag "IMAGE_NAME_WEBUI" "${IMAGE_NAME_WEBUI}:latest"
+         - docker tag "IMAGE_NAME_WEBUI" "${IMAGE_NAME_WEBUI}:${version}"
+
+       deploy:
+         provider: script
+         script: docker push "${IMAGE_NAME_WEBUI}:latest" && docker push "${IMAGE_NAME_WEBUI}:${version}"
+         on:
+           branch: master
