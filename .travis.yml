@@ -47,7 +47,7 @@ matrix:
          - docker images
 
        install:
-         - docker run --name movie-webui -p 80:80 -d ${IMAGE_NAME}
+         - docker run --name movie-webui -p 80:80 -d ${IMAGE_NAME_WEBUI}
          - docker ps
          - npm install
 
