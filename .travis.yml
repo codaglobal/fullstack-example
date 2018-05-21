@@ -17,10 +17,9 @@ matrix:
            - MONGODB_PORT=27017
 
        before_install:
-         - cd backend
-         - echo ${IMAGE_NAME}
+         - echo ${IMAGE_NAME_BACKEND}
          - docker run --name mongodb -d mongo
-         - docker build --tag ${IMAGE_NAME} ./backend/
+         - docker build --tag ${IMAGE_NAME_BACKEND} ./backend/
          - docker images
 
        install:
@@ -50,8 +49,7 @@ matrix:
            - version=0.0.2
 
        before_install:
-         - cd frontend
-         - docker build --tag ${IMAGE_NAME} ./webui/
+         - docker build --tag ${IMAGE_NAME_WEBUI} ./webui/
          - docker images
 
        install:
