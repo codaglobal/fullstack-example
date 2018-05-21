@@ -12,7 +12,7 @@ matrix:
        env:
          global:
            - IMAGE_NAME_BACKEND=cloudchaos/fullstack-example-backend
-           - version=0.0.2
+           - version=0.0.5
            - MONGODB_HOST=mongodb
            - MONGODB_PORT=27017
 

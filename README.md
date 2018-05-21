@@ -73,7 +73,7 @@ To run the webui locally:
       - `eval $(minikube docker-env)` - To talk to docker daemon from minikube
       - `cd Charts/movie-ui`
       - `docker build -t demo-app-ui .`  
-      
+
 - Install the backend chart
   `cd Charts/movie-api`
   `helm install --name fs-demo-api .`
@@ -90,7 +90,7 @@ To run the webui locally:
 - DONE: Orchestrate app with kubernetes
 - DONE: (k8s only) Move the API from / to /api or something
   - DONE: update helm chart / ingress
-- Create UI 
+- Create UI
   - DONE: deploy in container, expose ip to access from outside
   - leverage BDD pattern if possible so there are automated tests for FR as well
 - Create dummy data set and populate DB for demo purposes
@@ -99,3 +99,5 @@ To run the webui locally:
 - Consider how to also automate testing the k8s orchestration
   - at least helm lint the chart(s)?
   - maybe use Cloudify or 'minikube in Travis' to do E2E testing and include helm chart?
+- Eliminate Env Vars in travis file(s)
+- Automate version increment instead of env var for version number
