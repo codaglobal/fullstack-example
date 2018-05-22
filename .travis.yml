@@ -42,6 +42,8 @@ matrix:
 
     -  language: node_js
        sudo: required
+       addons:
+         chrome: stable
        node_js:
          - 6
        services:

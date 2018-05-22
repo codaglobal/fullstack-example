@@ -11,6 +11,7 @@ import {AppConfig} from './app.config';
 import {MovieService} from './services/movie.service';
 
 
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {DashboardComponent} from './dashboard/dashboard.component';
 import { MovieformComponent } from './movieform/movieform.component';
@@ -32,10 +33,7 @@ const appRoutes: Routes = [
     HttpModule,
     HttpClientModule,
     BrowserModule,
-    RouterModule.forRoot(
-      appRoutes,
-      {enableTracing: true}
-    )
+    AppRoutingModule
   ],
   providers: [AppConfig, MovieService],
   bootstrap: [AppComponent]
