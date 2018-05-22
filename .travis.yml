@@ -9,15 +9,9 @@ matrix:
        cache:
          directories:
            - node_modules
-       env:
-         global:
-           - IMAGE_NAME_BACKEND=cloudchaos/fullstack-example-backend
-           - version=0.0.2
-           - MONGODB_HOST=mongodb
-           - MONGODB_PORT=27017
 
        before_install:
-         - echo ${IMAGE_NAME_BACKEND}
+         - echo ${TRAVIS_BUILD_NUMBER}
          - docker run --name mongodb -d mongo
          - docker build --tag ${IMAGE_NAME_BACKEND} ./backend/
          - docker images
@@ -51,10 +45,6 @@ matrix:
        cache:
          directories:
            - node_modules
-       env:
-         global:
-           - IMAGE_NAME_WEBUI=cloudchaos/fullstack-example-webui
-           - version=0.0.2
 
        before_install:
          - docker build --tag ${IMAGE_NAME_WEBUI} ./webui/
