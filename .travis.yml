@@ -14,8 +14,6 @@ matrix:
            - node_modules
 
        before_install:
-         - echo ${TRAVIS_BUILD_NUMBER}
-         - echo ${version}
          - docker run --name mongodb -d mongo
          - docker build --tag ${IMAGE_NAME_BACKEND} ./backend/
          - docker images
