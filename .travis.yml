@@ -12,47 +12,38 @@ cache:
   directories:
     - node_modules
 
-matrix:
-  before_install:
-    - echo ${IMAGE_NAME_BACKEND}
-    - docker run --name mongodb -d mongo
-    - docker build --tag ${IMAGE_NAME_BACKEND} ./backend/
-    - docker images
+jobs:
+  include:
+    - stage: prep backend
+      script:
+        - echo ${IMAGE_NAME_BACKEND}
+        - docker run --name mongodb -d mongo
+        - docker build --tag ${IMAGE_NAME_BACKEND} ./backend/
+        - docker tag "$IMAGE_NAME_BACKEND" "${IMAGE_NAME_BACKEND}:latest"
+        - docker tag "$IMAGE_NAME_BACKEND" "${IMAGE_NAME_BACKEND}:${version}"
+        - docker images
+    - stage: build backend
+      script:
+        - cd backend
+        - docker run --name movie-api --link ${MONGODB_HOST}:${MONGODB_PORT} -e "MONGODB_HOST=${MONGODB_HOST}" -e "MONGODB_PORT=${MONGODB_PORT}" -p 3000:3000 -d ${IMAGE_NAME_BACKEND}
+        - docker ps
+        - npm install
+    - stage: prep frontend
+      script:
+        - docker build --tag ${IMAGE_NAME_WEBUI} ./webui/
+        - docker images
+    - stage: build frontend
+      script:
+        - cd webui
+        - docker run --name movie-webui -p 80:80 -d ${IMAGE_NAME_WEBUI}
+        - docker ps
+        - npm install
 
-  install:
-    - cd backend
-    - docker run --name movie-api --link ${MONGODB_HOST}:${MONGODB_PORT} -e "MONGODB_HOST=${MONGODB_HOST}" -e "MONGODB_PORT=${MONGODB_PORT}" -p 3000:3000 -d ${IMAGE_NAME_BACKEND}
-    - docker ps
-    - npm install
-
-  before_deploy:
+before_deploy:
     - docker login -u "$REGISTRY_USER" -p "$REGISTRY_PASS"
-    - docker tag "$IMAGE_NAME_BACKEND" "${IMAGE_NAME_BACKEND}:latest"
-    - docker tag "$IMAGE_NAME_BACKEND" "${IMAGE_NAME_BACKEND}:${version}"
-
-  deploy:
-    provider: script
-    script: docker push "${IMAGE_NAME_BACKEND}:latest" && docker push "${IMAGE_NAME_BACKEND}:${version}"
-    on:
-      branch: master
-
-  before_install:
-    - docker build --tag ${IMAGE_NAME_WEBUI} ./webui/
-    - docker images
-
-  install:
-    - cd webui
-    - docker run --name movie-webui -p 80:80 -d ${IMAGE_NAME_WEBUI}
-    - docker ps
-    - npm install
-
-  before_deploy:
-    - docker login -u "$REGISTRY_USER" -p "$REGISTRY_PASS"
-    - docker tag "$IMAGE_NAME_WEBUI" "${IMAGE_NAME_WEBUI}:latest"
-    - docker tag "$IMAGE_NAME_WEBUI" "${IMAGE_NAME_WEBUI}:${version}"
-
-  deploy:
-    provider: script
-    script: docker push "${IMAGE_NAME_WEBUI}:latest" && docker push "${IMAGE_NAME_WEBUI}:${version}"
-    on:
-      branch: master
+    
+deploy:
+  provider: script
+  script: docker push "${IMAGE_NAME_BACKEND}:latest" && docker push "${IMAGE_NAME_BACKEND}:${version}" && docker push "${IMAGE_NAME_WEBUI}:latest" && docker push "${IMAGE_NAME_WEBUI}:${version}"
+  on:
+    branch: master
