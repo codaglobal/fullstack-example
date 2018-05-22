@@ -12,6 +12,9 @@ cache:
   directories:
     - node_modules
 
+env:
+  - version=${TRAVIS_BUILD_NUMBER}
+
 jobs:
   include:
     - stage: prep backend
