@@ -30,10 +30,10 @@ script: bash scripts/test.sh
 
 before_deploy:
   - docker login -u "$REGISTRY_USER" -p "$REGISTRY_PASS"
-  - docker tag "IMAGE_NAME_BACKEND" "${IMAGE_NAME_BACKEND}:latest"
-  - docker tag "IMAGE_NAME_BACKEND" "${IMAGE_NAME_BACKEND}:${version}"
-  - docker tag "IMAGE_NAME_WEBUI" "${IMAGE_NAME_WEBUI}:latest"
-  - docker tag "IMAGE_NAME_WEBUI" "${IMAGE_NAME_WEBUI}:${version}"
+  - docker tag ${IMAGE_NAME_BACKEND} "${IMAGE_NAME_BACKEND}:latest"
+  - docker tag ${IMAGE_NAME_BACKEND} "${IMAGE_NAME_BACKEND}:${version}"
+  - docker tag ${IMAGE_NAME_WEBUI} "${IMAGE_NAME_WEBUI}:latest"
+  - docker tag ${IMAGE_NAME_WEBUI} "${IMAGE_NAME_WEBUI}:${version}"
 
 deploy:
   provider: script
