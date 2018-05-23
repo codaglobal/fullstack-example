@@ -15,7 +15,7 @@ matrix:
 
        before_install:
          - docker run --name mongodb -d mongo
-         - docker build --tag ${IMAGE_NAME_BACKEND} ./backend/
+         - docker build --build-arg web_domain=${web_domain} --build-arg MONGODB_HOST=${MONGODB_HOST} --build-arg MONGODB_PORT=${MONGODB_PORT} --tag ${IMAGE_NAME_BACKEND} ./backend/
          - docker images
 
        install:
@@ -49,12 +49,12 @@ matrix:
            - node_modules
 
        before_install:
-         - docker build --tag ${IMAGE_NAME_WEBUI} ./webui/
+         - docker build --build-arg SERVICE_HOST=movie-api --build-arg SERVICE_PORT=3000 -t ${IMAGE_NAME_WEBUI} ./webui/
          - docker images
 
        install:
          - cd webui
-         - docker run --name movie-webui -p 80:80 -d ${IMAGE_NAME_WEBUI}
+         - docker run --link movie-api --name movie-webui -p 80:80 -d ${IMAGE_NAME_WEBUI}
          - docker ps
          - npm install
 

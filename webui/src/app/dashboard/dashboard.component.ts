@@ -16,7 +16,7 @@ import {NgForm} from '@angular/forms';
 export class DashboardComponent implements OnInit {
   @ViewChild('deleteMovieModalCloseBtn') deleteMovieModalCloseBtn: ElementRef;
   title = 'dashboard';
-  movies: Movie[];
+  movies: Movie[] = [];
   newMovie: Movie = new Movie();
   createMovie:boolean = false;
   submitted = false;
