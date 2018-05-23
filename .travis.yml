@@ -39,4 +39,4 @@ deploy:
   provider: script
   script: bash scripts/deploy.sh
   on:
-    branch: feature/travis-script-merge
+    branch: master
