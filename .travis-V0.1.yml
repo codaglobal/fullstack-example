@@ -1,0 +1,70 @@
+env:
+  global:
+    - version=${TRAVIS_BUILD_NUMBER}
+matrix:
+  include:
+    -  language: node_js
+       sudo: required
+       node_js:
+         - 6
+       services:
+         - docker
+       cache:
+         directories:
+           - node_modules
+
+       before_install:
+         - docker run --name mongodb -d mongo
+         - docker build --build-arg web_domain=${web_domain} --build-arg MONGODB_HOST=${MONGODB_HOST} --build-arg MONGODB_PORT=${MONGODB_PORT} --tag ${IMAGE_NAME_BACKEND} ./backend/
+         - docker images
+
+       install:
+         - cd backend
+         - docker run --name movie-api --link ${MONGODB_HOST}:${MONGODB_PORT} -e "MONGODB_HOST=${MONGODB_HOST}" -e "MONGODB_PORT=${MONGODB_PORT}" -p 3000:3000 -d ${IMAGE_NAME_BACKEND}
+         - docker ps
+         - npm install
+
+       before_deploy:
+         - docker login -u "$REGISTRY_USER" -p "$REGISTRY_PASS"
+         - docker tag "IMAGE_NAME_BACKEND" "${IMAGE_NAME_BACKEND}:latest"
+         - docker tag "IMAGE_NAME_BACKEND" "${IMAGE_NAME_BACKEND}:${version}"
+
+       deploy:
+         provider: script
+         script: docker push "${IMAGE_NAME_BACKEND}:latest" && docker push "${IMAGE_NAME_BACKEND}:${version}"
+         on:
+           branch: master
+
+
+    -  language: node_js
+       sudo: required
+       addons:
+         chrome: stable
+       node_js:
+         - 6
+       services:
+         - docker
+       cache:
+         directories:
+           - node_modules
+
+       before_install:
+         - docker build --build-arg SERVICE_HOST=movie-api --build-arg SERVICE_PORT=3000 -t ${IMAGE_NAME_WEBUI} ./webui/
+         - docker images
+
+       install:
+         - cd webui
+         - docker run --link movie-api --name movie-webui -p 80:80 -d ${IMAGE_NAME_WEBUI}
+         - docker ps
+         - npm install
+
+       before_deploy:
+         - docker login -u "$REGISTRY_USER" -p "$REGISTRY_PASS"
+         - docker tag "IMAGE_NAME_WEBUI" "${IMAGE_NAME_WEBUI}:latest"
+         - docker tag "IMAGE_NAME_WEBUI" "${IMAGE_NAME_WEBUI}:${version}"
+
+       deploy:
+         provider: script
+         script: docker push "${IMAGE_NAME_WEBUI}:latest" && docker push "${IMAGE_NAME_WEBUI}:${version}"
+         on:
+           branch: master

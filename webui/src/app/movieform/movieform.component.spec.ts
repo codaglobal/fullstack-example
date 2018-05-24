@@ -1,6 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormsModule }   from '@angular/forms';
+import { HttpModule } from '@angular/http';
+import {AppConfig} from '../app.config';
 
 import { MovieformComponent } from './movieform.component';
+import {MovieService} from '../services/movie.service'
 
 describe('MovieformComponent', () => {
   let component: MovieformComponent;
@@ -8,7 +12,13 @@ describe('MovieformComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MovieformComponent ]
+      imports: [
+        FormsModule,
+        HttpModule
+      ],
+      declarations: [ MovieformComponent ],
+      providers: [MovieService,
+        AppConfig]
     })
     .compileComponents();
   }));

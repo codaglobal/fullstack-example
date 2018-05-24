@@ -1,52 +1,42 @@
 language: node_js
-
 sudo: required
-
 node_js:
   - 6
-
 services:
   - docker
-
 cache:
   directories:
     - node_modules
-
 env:
-  - version=${TRAVIS_BUILD_NUMBER}
+  global:
+    - version=${TRAVIS_BUILD_NUMBER}
+before_install:
+  - docker run --name mongodb -d mongo
+  - docker build --build-arg web_domain=${web_domain} --build-arg MONGODB_HOST=${MONGODB_HOST} --build-arg MONGODB_PORT=${MONGODB_PORT} --tag ${IMAGE_NAME_BACKEND} ./backend/
+  - docker build --build-arg SERVICE_HOST=movie-api --build-arg SERVICE_PORT=3000 -t ${IMAGE_NAME_WEBUI} ./webui/
+  - docker images
 
-jobs:
-  include:
-    - stage: prep backend
-      script:
-        - echo ${IMAGE_NAME_BACKEND}
-        - docker run --name mongodb -d mongo
-        - docker build --tag ${IMAGE_NAME_BACKEND} ./backend/
-        - docker tag "$IMAGE_NAME_BACKEND" "${IMAGE_NAME_BACKEND}:latest"
-        - docker tag "$IMAGE_NAME_BACKEND" "${IMAGE_NAME_BACKEND}:${version}"
-        - docker images
-    - stage: build backend
-      script:
-        - cd backend
-        - docker run --name movie-api --link ${MONGODB_HOST}:${MONGODB_PORT} -e "MONGODB_HOST=${MONGODB_HOST}" -e "MONGODB_PORT=${MONGODB_PORT}" -p 3000:3000 -d ${IMAGE_NAME_BACKEND}
-        - docker ps
-        - npm install
-    - stage: prep frontend
-      script:
-        - docker build --tag ${IMAGE_NAME_WEBUI} ./webui/
-        - docker images
-    - stage: build frontend
-      script:
-        - cd webui
-        - docker run --name movie-webui -p 80:80 -d ${IMAGE_NAME_WEBUI}
-        - docker ps
-        - npm install
+install:
+  - cd backend
+  - docker run --name movie-api --link ${MONGODB_HOST}:${MONGODB_PORT} -e "MONGODB_HOST=${MONGODB_HOST}" -e "MONGODB_PORT=${MONGODB_PORT}" -p 3000:3000 -d ${IMAGE_NAME_BACKEND}
+  - docker run --link movie-api --name movie-webui -p 80:80 -d ${IMAGE_NAME_WEBUI}
+  - docker ps
+  - npm install
+  - cd ../webui
+  - npm install
+  - cd ..
+
+script: bash scripts/test.sh
 
 before_deploy:
-    - docker login -u "$REGISTRY_USER" -p "$REGISTRY_PASS"
-    
+  - docker login -u "$REGISTRY_USER" -p "$REGISTRY_PASS"
+  - docker tag ${IMAGE_NAME_BACKEND} "${IMAGE_NAME_BACKEND}:latest"
+  - docker tag ${IMAGE_NAME_BACKEND} "${IMAGE_NAME_BACKEND}:${version}"
+  - docker tag ${IMAGE_NAME_WEBUI} "${IMAGE_NAME_WEBUI}:latest"
+  - docker tag ${IMAGE_NAME_WEBUI} "${IMAGE_NAME_WEBUI}:${version}"
+
 deploy:
   provider: script
-  script: docker push "${IMAGE_NAME_BACKEND}:latest" && docker push "${IMAGE_NAME_BACKEND}:${version}" && docker push "${IMAGE_NAME_WEBUI}:latest" && docker push "${IMAGE_NAME_WEBUI}:${version}"
+  script: bash scripts/deploy.sh
   on:
     branch: master

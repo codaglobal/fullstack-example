@@ -99,5 +99,5 @@ To run the webui locally:
 - Consider how to also automate testing the k8s orchestration
   - at least helm lint the chart(s)?
   - maybe use Cloudify or 'minikube in Travis' to do E2E testing and include helm chart?
-- Eliminate Env Vars in travis file(s)
-- Automate version increment instead of env var for version number
+- DONE: Eliminate Env Vars in travis file(s)
+- DONE: Automate version increment instead of env var for version number

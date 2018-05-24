@@ -34,3 +34,7 @@
 .noOutline {
     outline: none !important;
 }
+
+.movie-title {
+    margin-left: 0%;
+}
