@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import {MovieService} from '../services/movie.service';
 import Movie from '../beans/movie.bean';
-import {Router} from '@angular/router';
 import * as _ from 'lodash';
 import {NgForm} from '@angular/forms';
 
@@ -22,7 +21,7 @@ export class DashboardComponent implements OnInit {
   submitted = false;
   showMovie:boolean = false;
   currentMovie:Movie = new Movie();
-  constructor(private movieService: MovieService, private _router: Router) {
+  constructor(private movieService: MovieService) {
   }
 
   ngOnInit() {
@@ -34,11 +33,6 @@ export class DashboardComponent implements OnInit {
       this.movies = movies;
     });
   }
-
-  nativagetToMoviePage(movieId) {
-    this._router.navigate(['/movie', movieId]);
-  }
-
 
   movieCreated(movie:Movie) {
     this.movies.push(movie);

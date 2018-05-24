@@ -10,7 +10,7 @@ import {MovieService} from '../services/movie.service';
 })
 export class MovieformComponent implements OnInit, OnChanges {
   @ViewChild('addMoviecloseBtn') addMoviecloseBtn: ElementRef;
-  @Input() newMovie: Movie;
+  @Input() newMovie: Movie = new Movie();
   @Input() update: boolean;
   @Output() movieUpdated: EventEmitter<Movie> = new EventEmitter<Movie>();
   @Output() movieCreated:EventEmitter<Movie> = new EventEmitter<Movie>();
