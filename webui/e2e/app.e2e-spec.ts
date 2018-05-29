@@ -1,6 +1,6 @@
 import {browser} from 'protractor';
 import { AppDashboardPage } from './app.po';
-import * as mockMovie from './mocks/movie.mock.json';
+import MockMovie from './mocks/movie.mock';
 
 describe('fullstack-example-webui App', () => {
   let page: AppDashboardPage;
@@ -85,7 +85,7 @@ describe('fullstack-example-webui App', () => {
 //     Promise.all([
 //       expect(isFormFilled).toBeTruthy(),
 //       expect(createMovieModalSubmitButton.isEnabled).toBeTruthy(),
-//       expect(movieTitleElement.getText()).toEqual(mockMovie.title),
+//       expect(movieTitleElement.getText()).toEqual(MockMovie.title),
 //       expect(isEditCliecked).toBeTruthy(),
 //       expect(editMovieModalCssClass).toContain('show'),
 //       expect(isFormEdited).toBeTruthy(),

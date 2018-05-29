@@ -1,5 +1,5 @@
 import { browser, by, element } from 'protractor';
-import * as mockMovie from './mocks/movie.mock.json';
+import MockMovie from './mocks/movie.mock';
 
 export class AppDashboardPage {
   navigateTo() {
@@ -37,7 +37,7 @@ export class AppDashboardPage {
     return updateMovieModalCssClass;
   }
 
-  async fillCreateMovieForm(title = mockMovie.title, description = mockMovie.description, genre = mockMovie.genre) {
+  async fillCreateMovieForm(title = MockMovie.title, description = MockMovie.description, genre = MockMovie.genre) {
     const inputTitle = element(by.xpath('//*[@id="name"]')).getWebElement();
     const xpath = '//*[@id="updateMovieModal"]/app-movieform/div/div/div[2]/form/div/input';
     const inputDescription = element(by.xpath('//*[@id="description"]')).getWebElement();
@@ -53,7 +53,7 @@ export class AppDashboardPage {
     });
   }
 
-  async fillupdateMovieForm(title = mockMovie.title, description = mockMovie.description, genre = mockMovie.genre) {
+  async fillupdateMovieForm(title = MockMovie.title, description = MockMovie.description, genre = MockMovie.genre) {
     const inputTitle = element(by
       .xpath('//*[@id="updateMovieModal"]/app-movieform/div/div/div[2]/form/div[1]/input'))
       .getWebElement();
