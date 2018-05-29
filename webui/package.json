@@ -9,7 +9,8 @@
     "test": "ng test --watch=false",
     "test-dev": "ng test -sm=false",
     "lint": "ng lint",
-    "e2e": "ng e2e",
+    "e2e": "ng e2e --port 4200",
+    "e2e-dev": "ng e2e -s false",
     "reinstall": "rm -r node_modules && npm install"
   },
   "private": true,
