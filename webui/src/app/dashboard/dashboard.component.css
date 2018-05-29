@@ -1,0 +1,40 @@
+.movie {
+    border: 5px;
+    padding: 5px;
+    width: 30%;
+}
+
+.genre {
+    font-size: 12px;
+}
+
+.createMovie {
+    margin-bottom: 10px;
+}
+
+.listMovies {
+    align-items: center;
+    margin: 0 auto;
+    justify-content: center;
+}
+
+.card-link {
+    outline: none;
+}
+
+.deleteMovie {
+    color: red;
+}
+
+.float-right {
+    margin: 2px;
+    padding: 2px;
+}
+
+.noOutline {
+    outline: none !important;
+}
+
+.movie-title {
+    margin-left: 0%;
+}

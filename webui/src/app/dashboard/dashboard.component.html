@@ -1,0 +1,62 @@
+<div class="row">
+  <div class="col">
+    <div class="float-right">
+      <button class="btn btn-success createMovie" data-toggle="modal" data-target="#createMovieModal">
+        create movie
+      </button>
+    </div>
+  </div>
+</div>
+<div class="row listMovies">
+  <div *ngFor='let movie of movies' class="movie">
+    <div class="card">
+      <div class="card-body">
+        <div class="row movie-title">
+          <h4 class="card-title">{{movie.title}}</h4>
+          <div class="col">
+            <div class="float-right">
+                <a href="#" (click)="showModal(movie)" class="card-link deleteMovie" data-toggle="modal" data-target="#deleteMovieConfirmationModal">Delete</a>
+            </div>
+            <div class="float-right">
+                <a href="#" (click)="showModal(movie)" class="card-link" data-toggle="modal" data-target="#updateMovieModal">Edit</a>
+              </div>
+          </div>
+        </div>
+        <p class="card-text">{{movie.description ? movie.description : 'None'}}</p>
+        <p class="genre">{{movie.genre}}</p>
+      </div>
+    </div>
+  </div>
+
+
+  <div id="createMovieModal" class="modal fade" role="dialog" [hidden]="submitted">
+    <app-movieform [newMovie]="newMovie" [update]="false" (movieCreated)="movieCreated($event)"></app-movieform>
+  </div>
+
+
+
+  <div id="updateMovieModal" class="modal fade" role="dialog">
+    <app-movieform [newMovie]="currentMovie" [update]="true" (movieUpdated)="movieUpdated($event)"></app-movieform>
+  </div>
+
+
+
+
+
+
+  <div id="deleteMovieConfirmationModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close noOutline" data-dismiss="modal" #deleteMovieModalCloseBtn>&times;</button>
+        </div>
+        <div class="modal-body">
+          <p>Are you sure to delete {{currentMovie.title}}</p>
+        </div>
+        <div class="modal-footer">
+          <button class="btn noOutline" data-dismiss="modal">Cancel</button>
+          <button class="btn btn-danger" (click)="deleteMovie()">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
