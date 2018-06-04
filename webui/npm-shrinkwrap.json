@@ -1335,15 +1335,11 @@
       "resolved": "https://registry.npmjs.org/boom/-/boom-2.10.1.tgz",
       "integrity": "sha1-OciRjO/1eZ+D+UkqhI9iWt0Mdm8=",
       "dev": true,
-      "requires": {
-        "hoek": "2.x.x"
-      },
       "dependencies": {
         "hoek": {
           "version": "5.0.3",
           "resolved": "https://registry.npmjs.org/hoek/-/hoek-5.0.3.tgz",
-          "integrity": "sha512-Bmr56pxML1c9kU+NS51SMFkiVQAb+9uFfXwyqR2tn4w2FPvmPt65eZ9aCcEfRXd9G74HkZnILC6p967pED4aiw==",
-          "dev": true
+          "integrity": "sha512-Bmr56pxML1c9kU+NS51SMFkiVQAb+9uFfXwyqR2tn4w2FPvmPt65eZ9aCcEfRXd9G74HkZnILC6p967pED4aiw=="
         }
       }
     },
@@ -5094,7 +5090,6 @@
       "requires": {
         "boom": "2.x.x",
         "cryptiles": "2.x.x",
-        "hoek": "2.x.x",
         "sntp": "1.x.x"
       }
     },
@@ -5125,12 +5120,6 @@
         "minimalistic-assert": "^1.0.0",
         "minimalistic-crypto-utils": "^1.0.1"
       }
-    },
-    "hoek": {
-      "version": "5.0.3",
-      "resolved": "https://registry.npmjs.org/hoek/-/hoek-5.0.3.tgz",
-      "integrity": "sha512-Bmr56pxML1c9kU+NS51SMFkiVQAb+9uFfXwyqR2tn4w2FPvmPt65eZ9aCcEfRXd9G74HkZnILC6p967pED4aiw==",
-      "dev": true
     },
     "homedir-polyfill": {
       "version": "1.0.1",
@@ -6254,7 +6243,6 @@
                   "requires": {
                     "boom": "2.x.x",
                     "cryptiles": "2.x.x",
-                    "hoek": "2.x.x",
                     "sntp": "1.x.x"
                   },
                   "dependencies": {
@@ -6262,9 +6250,6 @@
                       "version": "2.10.1",
                       "resolved": "https://registry.npmjs.org/boom/-/boom-2.10.1.tgz",
                       "integrity": "sha1-OciRjO/1eZ+D+UkqhI9iWt0Mdm8=",
-                      "requires": {
-                        "hoek": "2.x.x"
-                      },
                       "dependencies": {
                         "hoek": {
                           "version": "5.0.3",
@@ -6297,9 +6282,6 @@
                       "version": "1.0.9",
                       "resolved": "https://registry.npmjs.org/sntp/-/sntp-1.0.9.tgz",
                       "integrity": "sha1-ZUEYTMkK7qbG57NeJlkIJEPGYZg=",
-                      "requires": {
-                        "hoek": "2.x.x"
-                      },
                       "dependencies": {
                         "hoek": {
                           "version": "5.0.3",
@@ -9855,15 +9837,11 @@
       "resolved": "https://registry.npmjs.org/sntp/-/sntp-1.0.9.tgz",
       "integrity": "sha1-ZUEYTMkK7qbG57NeJlkIJEPGYZg=",
       "dev": true,
-      "requires": {
-        "hoek": "2.x.x"
-      },
       "dependencies": {
         "hoek": {
           "version": "5.0.3",
           "resolved": "https://registry.npmjs.org/hoek/-/hoek-5.0.3.tgz",
-          "integrity": "sha512-Bmr56pxML1c9kU+NS51SMFkiVQAb+9uFfXwyqR2tn4w2FPvmPt65eZ9aCcEfRXd9G74HkZnILC6p967pED4aiw==",
-          "dev": true
+          "integrity": "sha512-Bmr56pxML1c9kU+NS51SMFkiVQAb+9uFfXwyqR2tn4w2FPvmPt65eZ9aCcEfRXd9G74HkZnILC6p967pED4aiw=="
         }
       }
     },
