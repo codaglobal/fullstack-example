@@ -66,12 +66,12 @@ To run the webui locally:
 - NOTE: The helm chart pulls an docker image from the repository mentioned in `values.yaml`. To run backend and webui on k8s, you need to have docker images ready.
     ## To create backend image
       - `eval $(minikube docker-env)` - To talk to docker daemon from minikube
-      - `cd Charts/movie-api`
+      - `cd backend`
       - `docker build -t demo-app-service .`
 
     ## To create webui image
       - `eval $(minikube docker-env)` - To talk to docker daemon from minikube
-      - `cd Charts/movie-ui`
+      - `cd webui`
       - `docker build -t demo-app-ui .`  
 
 - Install the backend chart
