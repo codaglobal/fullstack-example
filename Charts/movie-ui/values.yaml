@@ -5,7 +5,7 @@
 replicaCount: 1
 
 image:
-  repository: demo-app-ui
+  repository: cloudchaos/fullstack-example-webui
   tag: latest
   pullPolicy: IfNotPresent
 

@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const Router = require('express').Router;
 const cors = require('cors');
+const PopuldateDb = require('../config/loadTestData.config');
 
 this.router = new Router();
 // create express app
@@ -35,6 +36,8 @@ mongoose.connect(dbConfig.url)
     console.log('Could not connect to the database. Exiting now...');
     process.exit();
 });
+
+PopuldateDb.loadData();
 
 app.use('/api', this.router);
 

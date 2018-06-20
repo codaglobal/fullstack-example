@@ -5,7 +5,7 @@
 replicaCount: 1
 
 image:
-  repository: demo-app-service
+  repository: cloudchaos/fullstack-example-backend
   tag: latest
   pullPolicy: IfNotPresent
 
