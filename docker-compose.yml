@@ -15,7 +15,7 @@ services:
       args:
         - MONGODB_HOST=mongodb
         - MONGODB_PORT=27017
-        - web_domain="http://localhost"
+        - web_domain=*
     container_name: backend
     links:
       - mongodb
