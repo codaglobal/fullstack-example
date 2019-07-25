@@ -1,0 +1,43 @@
+version: '3'
+services:
+  mongodb:
+    image: "bitnami/mongodb:3.6.4"
+    container_name: mongodb
+    ports:
+      - 27017:27017
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+    networks:
+      - fullstack
+  backend:
+    build: 
+      context: backend/.
+      args:
+        - MONGODB_HOST=mongodb
+        - MONGODB_PORT=27017
+        - web_domain="http://localhost"
+    container_name: backend
+    links:
+      - mongodb
+    ports:
+      - "3000:3000"
+    depends_on: 
+      - mongodb
+    command: ["./wait-for-it.sh", "mongodb:27017", "-t","0", "--","npm","start"]
+    networks:
+      - fullstack
+  webui:
+    build: webui/.
+    container_name: webui
+    ports:
+      - "80:80"
+    environment:
+      - SERVICE_HOST=backend
+      - SERVICE_PORT=3000
+    links:
+      - backend
+      - mongodb
+    networks:
+      - fullstack
+networks:
+  fullstack: {}
